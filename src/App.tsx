@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -22,19 +22,39 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import Performance from "./pages/Performance";
+import UserInterface from "./pages/UserInterface";
+import NativeFeatures from "./pages/NativeFeatures";
+
+import { speedometer, brush, apps } from 'ionicons/icons';
+
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Redirect exact path="/" to="/performance"/>
+          <Route path="/performance" render={() => <Performance/>} exact={true}/>
+          <Route path="/userinterface" render={() => <UserInterface/>} exact={true}/>
+          <Route path="/nativefeatures" render={() => <NativeFeatures/>} exact={true}/>
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="performance" href="/performance">
+            <IonIcon icon={speedometer}/>
+            <IonLabel>Performance</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="userinterface" href="/userinterface">
+            <IonIcon icon={brush}/>
+            <IonLabel>User Interface</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="nativefeatures" href="/nativefeatures">
+            <IonIcon icon={apps}/>
+            <IonLabel>Native Features</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );

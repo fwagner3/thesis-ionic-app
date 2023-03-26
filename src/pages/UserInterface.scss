@@ -1,0 +1,9 @@
+.user-interface {
+    padding-top: env(safe-area-inset-top);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.datetime {
+    justify-content: start !important;
+}
